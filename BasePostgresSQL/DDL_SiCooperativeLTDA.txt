@@ -1,0 +1,5 @@
+create type tipo_conta as  enum ('tipo conta 1', 'tipo conta 2', 'tipo conta 3', 'tipo conta 4');
+create table associado ( id integer PRIMARY KEY, nome varchar, sobrenome varchar, idade integer, email varchar);
+create table conta (id integer PRIMARY KEY, tipo tipo_conta, data_criacao timestamp default current_date, id_associado integer, FOREIGN KEY (id_associado) REFERENCES associado (id));
+create table cartao (id integer PRIMARY KEY, num_cartao integer, nom_impresso varchar(100), data_criacao timestamp default current_date, id_conta integer, id_associado integer, FOREIGN KEY (id_conta) REFERENCES conta (id), FOREIGN KEY (id_associado) REFERENCES associado (id));
+create table movimento (id integer PRIMARY KEY, vlr_transacao decimal(10,2), des_transacao varchar, data_movimento timestamp, id_cartao integer, FOREIGN KEY (id_cartao) REFERENCES cartao (id));
